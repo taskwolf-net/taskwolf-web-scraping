@@ -1,0 +1,10 @@
+{
+  "web.scraping.account.link.description": "Great news! You don't need to link an account to use this module. Just click on \"skip\" to go to the next page.",
+
+  "web.scraping.action.mail.name": "Find email",
+  "web.scraping.action.mail.description": "Used to find an email on a website",
+  "web.scraping.action.mail.input.website.name": "Website",
+  "web.scraping.action.mail.input.website.description": "The website on which to search for the email",
+  "web.scraping.action.mail.output.mail": "Email",
+  "web.scraping.action.mail.output.website": "Website"
+}

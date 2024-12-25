@@ -1,0 +1,10 @@
+{
+  "web.scraping.account.link.description": "Gute Nachrichten! Sie brauchen kein Konto zu verknüpfen, um dieses Modul zu nutzen. Klicken Sie einfach auf \"Überspringen\", um zur nächsten Seite zu gelangen.",
+
+  "web.scraping.action.mail.name": "E-Mail finden",
+  "web.scraping.action.mail.description": "Wird verwendet, um eine E-Mail auf einer Website zu finden",
+  "web.scraping.action.mail.input.website.name": "Website",
+  "web.scraping.action.mail.input.website.description": "Die Website, auf der nach der E-Mail gesucht werden soll",
+  "web.scraping.action.mail.output.mail": "E-Mail",
+  "web.scraping.action.mail.output.website": "Website"
+}
