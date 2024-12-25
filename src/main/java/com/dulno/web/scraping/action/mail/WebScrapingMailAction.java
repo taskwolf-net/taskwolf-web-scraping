@@ -7,6 +7,7 @@ import com.dulno.core.database.*;
 import com.dulno.core.workflow.component.input.InputComponentDataType;
 import com.dulno.core.workflow.component.input.InputComponentVariable;
 import com.dulno.core.workflow.component.output.OutputComponentVariable;
+import com.dulno.web.scraping.browser.WebScrapingBrowserPool;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 
@@ -17,15 +18,17 @@ import java.util.concurrent.CompletableFuture;
 @AllArgsConstructor(staticName = "create")
 public final class WebScrapingMailAction implements Action<WebScrapingMailActionExecutor> {
   public static WebScrapingMailAction create(
+    WebScrapingBrowserPool webScrapingBrowserPool,
     DatabaseConnection databaseConnection, DatabaseKeyspace databaseKeyspace
   ) {
     var contentColumns = Lists.<DatabaseColumn>newArrayList();
     contentColumns.add(DatabaseColumn.create("website", DatabaseDataType.TEXT));
-    return new WebScrapingMailAction(ActionContentDatabaseTable.create(
-      databaseConnection, databaseKeyspace, "action_web_scraping_mail",
-      contentColumns));
+    return new WebScrapingMailAction(webScrapingBrowserPool,
+      ActionContentDatabaseTable.create(databaseConnection, databaseKeyspace,
+        "action_web_scraping_mail", contentColumns));
   }
 
+  private final WebScrapingBrowserPool webScrapingBrowserPool;
   private final ActionContentDatabaseTable contentDatabaseTable;
 
   @Override
@@ -65,7 +68,8 @@ public final class WebScrapingMailAction implements Action<WebScrapingMailAction
   @Override
   public CompletableFuture<WebScrapingMailActionExecutor> build(UUID actionId) {
     return contentDatabaseTable.findContent(actionId).thenApply(content ->
-      WebScrapingMailActionExecutor.create(content.findCell(1).stringValue()));
+      WebScrapingMailActionExecutor.create(webScrapingBrowserPool,
+        content.findCell(1).stringValue()));
   }
 
   @Override
