@@ -14,7 +14,13 @@ public class WebScrapingInjectionModule extends AbstractModule {
 
   }
 
-  private static final int BROWSER_POOL_SIZE = 1;
+  @Provides
+  @Singleton
+  WebScrapingConfiguration provideWebScrapingConfiguration() throws Exception {
+    return WebScrapingConfiguration.createAndLoad();
+  }
+
+  private static final int BROWSER_POOL_SIZE = 2;
 
   @Provides
   @Singleton
