@@ -10,6 +10,7 @@ import com.dulno.core.module.ModuleDescription;
 import com.dulno.core.module.ModuleInformation;
 import com.dulno.core.module.ModuleLoadPriority;
 import com.dulno.web.scraping.action.mail.WebScrapingMailAction;
+import com.dulno.web.scraping.browser.WebScrapingBrowserPool;
 import com.google.inject.Injector;
 
 @ModuleDescription(name = "web-scraping", version = "1.0.0-SNAPSHOT",
@@ -48,9 +49,11 @@ public final class WebScrapingModule extends Module {
   public ActionRepository actionRepository() {
     var databaseConnection = injector().getInstance(DatabaseConnection.class);
     var databaseKeyspace = injector().getInstance(DatabaseKeyspace.class);
+    var webScrapingBrowserPool = injector().getInstance(WebScrapingBrowserPool.class);
+    var webScrapingConfiguration = injector().getInstance(WebScrapingConfiguration.class);
     var repository = ActionRepository.create();
-    repository.registerAction(WebScrapingMailAction.create(databaseConnection,
-      databaseKeyspace));
+    repository.registerAction(WebScrapingMailAction.create(webScrapingBrowserPool,
+      webScrapingConfiguration, databaseConnection, databaseKeyspace));
     return repository;
   }
 }
