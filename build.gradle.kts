@@ -42,7 +42,7 @@ dependencies {
   compileOnly("org.json:json:20240303")
   compileOnly("commons-io:commons-io:2.18.0")
 
-  implementation("org.seleniumhq.selenium:selenium-java:4.27.0")
+  implementation("net.sourceforge.htmlunit:htmlunit:2.70.0")
 }
 
 tasks.test {

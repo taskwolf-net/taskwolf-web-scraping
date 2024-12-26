@@ -1,8 +1,9 @@
 package com.dulno.web.scraping.browser;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import com.gargoylesoftware.htmlunit.SilentCssErrorHandler;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.SilentJavaScriptErrorListener;
 
 public final class WebScrapingBrowser {
   public static WebScrapingBrowser create() {
@@ -11,29 +12,35 @@ public final class WebScrapingBrowser {
     return browser;
   }
 
-  private WebDriver driver;
+  private WebClient client;
 
   private void initialize() {
-    System.setProperty("webdriver.chrome.driver",
-      System.getProperty("user.dir") + "/configurations/web-scraping/chromedriver");
-    var options = new ChromeOptions();
-    options.addArguments("--headless");
-    options.addArguments("--no-sandbox");
-    options.addArguments("--disable-gpu");
-    options.addArguments("--disable-javascript");
-    options.addArguments("--disable-software-rasterizer");
-    options.addArguments("--blink-settings=imagesEnabled=false");
-    driver = new ChromeDriver(options);
+    client = new WebClient();
+    client.getOptions().setJavaScriptEnabled(true);
+    client.getOptions().setCssEnabled(false);
+    client.getOptions().setPrintContentOnFailingStatusCode(false);
+    client.getOptions().setThrowExceptionOnScriptError(false);
+    client.getOptions().setThrowExceptionOnFailingStatusCode(false);
+    client.setJavaScriptErrorListener(new SilentJavaScriptErrorListener());
+    client.setCssErrorHandler(new SilentCssErrorHandler());
+    client.getOptions().setDownloadImages(false);
+    client.getOptions().setRedirectEnabled(true);
+    client.getOptions().setTimeout(1000);
+    client.setJavaScriptTimeout(1000);
   }
 
   public String fetchHtmlContent(String url) {
-    driver.get(url);
-    return driver.getPageSource();
+    try {
+      HtmlPage page = client.getPage(url);
+      return page.asXml();
+    } catch (Exception exception) {
+      return "";
+    }
   }
 
   public void close() {
-    if (driver != null) {
-      driver.quit();
+    if (client != null) {
+      client.close();
     }
   }
 }

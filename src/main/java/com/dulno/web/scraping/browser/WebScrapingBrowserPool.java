@@ -5,10 +5,7 @@ import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 @RequiredArgsConstructor(staticName = "create")
 public final class WebScrapingBrowserPool {
@@ -27,16 +24,21 @@ public final class WebScrapingBrowserPool {
   private final ExecutorService executor;
   private final List<WebScrapingBrowser> browsers;
 
-  public Future<String> fetchHtml(String url) {
-    return executor.submit(() -> processHtmlFetch(url));
+  public CompletableFuture<String> fetchHtml(String url) {
+    return CompletableFuture.supplyAsync(() -> processHtmlFetch(url), executor);
   }
 
-  private String processHtmlFetch(String url) throws Exception {
-    var browser = acquireBrowser();
+  private String processHtmlFetch(String url) {
     try {
-      return browser.fetchHtmlContent(url);
-    } finally {
-      releaseBrowser(browser);
+      var browser = acquireBrowser();
+      try {
+        return browser.fetchHtmlContent(url);
+      } finally {
+        releaseBrowser(browser);
+      }
+    } catch (Exception exception) {
+      errorRepository.processError(exception);
+      return "";
     }
   }
 
