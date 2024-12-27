@@ -1,21 +1,21 @@
 package com.dulno.web.scraping;
 
 import com.dulno.core.account.AccountLink;
-import com.dulno.core.action.ActionRepository;
+import com.dulno.workflow.action.ActionRepository;
 import com.dulno.core.database.DatabaseConnection;
 import com.dulno.core.database.DatabaseKeyspace;
 import com.dulno.core.log.Log;
-import com.dulno.core.module.Module;
 import com.dulno.core.module.ModuleDescription;
 import com.dulno.core.module.ModuleInformation;
 import com.dulno.core.module.ModuleLoadPriority;
 import com.dulno.web.scraping.action.mail.WebScrapingMailAction;
 import com.dulno.web.scraping.browser.WebScrapingBrowserPool;
+import com.dulno.workflow.integration.Integration;
 import com.google.inject.Injector;
 
 @ModuleDescription(name = "web-scraping", version = "1.0.0-SNAPSHOT",
   priority = ModuleLoadPriority.NEUTRAL)
-public final class WebScrapingModule extends Module {
+public final class WebScrapingModule extends Integration {
   private Log log;
   private AccountLink accountLink;
 
