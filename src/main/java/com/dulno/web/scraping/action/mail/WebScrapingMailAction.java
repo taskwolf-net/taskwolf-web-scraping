@@ -58,7 +58,9 @@ public final class WebScrapingMailAction implements Action<WebScrapingMailAction
   }
 
   @Override
-  public CompletableFuture<Void> insert(UUID actionId, Map<String, Object> content) {
+  public CompletableFuture<Void> insert(
+    UUID actionId, UUID ownerId, Map<String, Object> content
+  ) {
     return contentDatabaseTable.insertContent(actionId,
       DatabaseRow.of(content.get("website")));
   }
