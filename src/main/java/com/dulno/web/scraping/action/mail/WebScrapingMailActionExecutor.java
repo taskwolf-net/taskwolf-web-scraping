@@ -7,6 +7,8 @@ import com.dulno.workflow.placeholder.PlaceholderDissolve;
 import com.dulno.web.scraping.WebScrapingConfiguration;
 import com.dulno.web.scraping.browser.WebScrapingBrowserPool;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.regex.Pattern;
@@ -71,8 +73,13 @@ public final class WebScrapingMailActionExecutor implements ActionExecutor {
       .map(email -> email.split("@")[0]).collect(Collectors.toSet());
     var highestRated = rateSet(webScrapingConfiguration.emailPrefixes(),
       emailPrefixes).getLast();
-    return emails.stream().filter(email -> email.startsWith(highestRated))
+    var result = emails.stream().filter(email -> email.startsWith(highestRated))
       .findFirst().get();
+    try {
+      return URLDecoder.decode(result, StandardCharsets.UTF_8).trim();
+    } catch (Exception exception) {
+      return result;
+    }
   }
 
   private HashSet<String> extractEmails(String content) {
