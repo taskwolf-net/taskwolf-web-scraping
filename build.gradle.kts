@@ -52,7 +52,7 @@ dependencies {
 
   compileOnly("com.datastax.oss:java-driver-core:4.17.0")
 
-  compileOnly("org.json:json:20240303")
+  compileOnly("org.json:json:20250107")
 
   implementation("net.sourceforge.htmlunit:htmlunit:2.70.0")
   implementation("commons-io:commons-io:2.18.0")
