@@ -1,4 +1,4 @@
-package com.dulno.web.scraping.browser;
+package net.taskwolf.web.scraping.browser;
 
 import com.gargoylesoftware.htmlunit.SilentCssErrorHandler;
 import com.gargoylesoftware.htmlunit.WebClient;

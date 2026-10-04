@@ -1,6 +1,6 @@
-package com.dulno.web.scraping.browser;
+package net.taskwolf.web.scraping.browser;
 
-import com.dulno.core.error.ErrorRepository;
+import net.taskwolf.core.error.ErrorRepository;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 

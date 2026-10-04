@@ -1,11 +1,11 @@
-package com.dulno.web.scraping.action.mail;
+package net.taskwolf.web.scraping.action.mail;
 
 import com.datastax.oss.driver.shaded.guava.common.collect.Maps;
-import com.dulno.workflow.action.ActionExecutor;
-import com.dulno.workflow.action.ActionResult;
-import com.dulno.workflow.placeholder.PlaceholderDissolve;
-import com.dulno.web.scraping.WebScrapingConfiguration;
-import com.dulno.web.scraping.browser.WebScrapingBrowserPool;
+import net.taskwolf.workflow.action.ActionExecutor;
+import net.taskwolf.workflow.action.ActionResult;
+import net.taskwolf.workflow.placeholder.PlaceholderDissolve;
+import net.taskwolf.web.scraping.WebScrapingConfiguration;
+import net.taskwolf.web.scraping.browser.WebScrapingBrowserPool;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;

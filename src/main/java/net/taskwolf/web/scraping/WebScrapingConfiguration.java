@@ -1,6 +1,6 @@
-package com.dulno.web.scraping;
+package net.taskwolf.web.scraping;
 
-import com.dulno.core.configuration.Configuration;
+import net.taskwolf.core.configuration.Configuration;
 import lombok.Getter;
 import lombok.experimental.Accessors;
 import org.json.JSONObject;

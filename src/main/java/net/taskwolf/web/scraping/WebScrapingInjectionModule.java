@@ -1,7 +1,7 @@
-package com.dulno.web.scraping;
+package net.taskwolf.web.scraping;
 
-import com.dulno.core.error.ErrorRepository;
-import com.dulno.web.scraping.browser.WebScrapingBrowserPool;
+import net.taskwolf.core.error.ErrorRepository;
+import net.taskwolf.web.scraping.browser.WebScrapingBrowserPool;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;

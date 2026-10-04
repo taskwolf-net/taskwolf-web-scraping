@@ -1,16 +1,16 @@
-package com.dulno.web.scraping;
+package net.taskwolf.web.scraping;
 
-import com.dulno.core.account.AccountLink;
-import com.dulno.workflow.action.ActionRepository;
-import com.dulno.core.database.DatabaseConnection;
-import com.dulno.core.database.DatabaseKeyspace;
-import com.dulno.core.log.Log;
-import com.dulno.core.module.ModuleDescription;
-import com.dulno.core.module.ModuleInformation;
-import com.dulno.core.module.ModuleLoadPriority;
-import com.dulno.web.scraping.action.mail.WebScrapingMailAction;
-import com.dulno.web.scraping.browser.WebScrapingBrowserPool;
-import com.dulno.workflow.integration.Integration;
+import net.taskwolf.core.account.AccountLink;
+import net.taskwolf.workflow.action.ActionRepository;
+import net.taskwolf.core.database.DatabaseConnection;
+import net.taskwolf.core.database.DatabaseKeyspace;
+import net.taskwolf.core.log.Log;
+import net.taskwolf.core.module.ModuleDescription;
+import net.taskwolf.core.module.ModuleInformation;
+import net.taskwolf.core.module.ModuleLoadPriority;
+import net.taskwolf.web.scraping.action.mail.WebScrapingMailAction;
+import net.taskwolf.web.scraping.browser.WebScrapingBrowserPool;
+import net.taskwolf.workflow.integration.Integration;
 import com.google.inject.Injector;
 
 @ModuleDescription(name = "web-scraping", version = "1.0.0-SNAPSHOT",
